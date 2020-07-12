@@ -1,4 +1,4 @@
-package multiThreading;
+package Thread_multi;
 /**【创建线程池】
  * newCachedThreadPool：可缓存的线程池
  * newFixedThreadPool：固定数目的线程池

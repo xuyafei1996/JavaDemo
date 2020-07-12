@@ -1,9 +1,9 @@
-package multiThreading;
+package Thread_multi;
 
 /**
  * 【演示3.线程优先级】
  * */
-public class ThreadDemo3_setPriority {
+public class SetPriority {
     //该静态类可抽离出去，此处只为表示方便，与main集合在同一类中
     public static class ThreadPriority extends Thread{
         @Override
@@ -29,7 +29,6 @@ public class ThreadDemo3_setPriority {
         System.out.println(Thread.MIN_PRIORITY); //1
         System.out.println(Thread.NORM_PRIORITY); //5
         //更改线程优先级
-        //tp1.setPriority(10000); //IllegalArgumentException
         tp1.setPriority(5);
         tp2.setPriority(10);
         tp3.setPriority(1);

@@ -1,6 +1,12 @@
-package multiThreading;
+package Thread_multi;
 
-public class RunnableDemo_ProducerANDConsumer {
+/**
+ * 【线程通信】
+ * 生产者和消费者，操作共享数据
+ * 生产者生产完毕，唤醒消费者：生产者的put方法使用synchronized加锁
+ * 消费者生产完毕，唤醒生产者：消费者的get方法使用synchronized加锁
+ */
+public class Mul_Communicate1 {
     public static class Box{
         //定义一个成员变量，表示第x瓶奶
         private int milk;
@@ -46,7 +52,6 @@ public class RunnableDemo_ProducerANDConsumer {
             }
         }
     }
-
     public static class Consumer implements Runnable{
         private Box box;
         public Consumer(Box box){this.box = box;}
@@ -65,9 +70,9 @@ public class RunnableDemo_ProducerANDConsumer {
     public static void main(String[] args) {
         //创建奶箱对象，这是共享数据区域
         Box box = new Box();
-        //创建生产者对象，把奶箱对象作为构造方法参数传递，因为这个类中有存储牛奶操作
+        //创建生产者对象，传入奶箱对象(共享数据区域)，进行存储牛奶操作
         Producer p = new Producer(box);
-        //创建消费者对象，把奶箱对象作为构造方法参数传递，因为这个类中有获取牛奶操作
+        //创建消费者对象，传入奶箱对象(共享数据区域)，进行获取牛奶操作
         Consumer c = new Consumer(box);
         //创建2个线程对象，分别把生产者对象和消费者对象作为构造方法参数传递
         Thread t1 = new Thread(p,"生产者");
