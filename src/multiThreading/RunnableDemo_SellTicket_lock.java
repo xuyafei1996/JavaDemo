@@ -1,18 +1,22 @@
 package multiThreading;
 
-public class RunnableDaemon_SellTicket_synchronized {
+import java.util.Locale;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class RunnableDemo_SellTicket_lock {
     public static class SellTicket implements Runnable{
         private int tickets = 10;
-        private Object obj = new Object();
+        private Lock lock = new ReentrantLock();
         @Override
         public void run() {
             while (true) {
-                synchronized (obj){
-                    if (tickets > 0) {
-                        System.out.println(Thread.currentThread().getName() + "正在出售第" + tickets + "张票");
-                        tickets--;
-                    }
+                lock.lock();
+                if (tickets > 0) {
+                    System.out.println(Thread.currentThread().getName() + "正在出售第" + tickets + "张票");
+                    tickets--;
                 }
+                lock.unlock();
             }
         }
     }

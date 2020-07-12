@@ -1,6 +1,6 @@
 package multiThreading;
 
-public class RunnableDeamon_start {
+public class RunnableDemo_start {
     public static class MyRunnable implements Runnable{
         @Override
         public void run() {

@@ -1,6 +1,6 @@
 package multiThreading;
 
-public class RunnableDaemon_ProducerANDConsumer {
+public class RunnableDemo_ProducerANDConsumer {
     public static class Box{
         //定义一个成员变量，表示第x瓶奶
         private int milk;
