@@ -13,6 +13,30 @@ import java.util.concurrent.*;
  * M3.实现Callable(待完成)
  */
 public class Create {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        //M1.使用MyThread
+        MyThread t1 = new MyThread();
+        MyThread t2 = new MyThread("M1_1");
+        MyThread t3 = new MyThread();
+        t3.setName("M1_2");
+//        t1.start();
+//        t2.start();
+//        t3.start();
+
+        //创建MyRunnable类的对象
+        MyRunnable my = new MyRunnable();
+        //创建Thread类的对象，把MyRunnable对象作为构造方法的参数
+        //方法1.Thread(Runnable target)
+        Thread t4 = new Thread(my);
+        Thread t5 = new Thread(my, "MyThread(MyRunnable)");
+//         t4.start();
+//         t5.start();
+
+        //M3.实现Callable
+//        method1();
+        method2();
+    }
+
     //该静态类可抽离出去，此处只为表示方便，与main集合在同一类中
     public static class MyThread extends Thread{
         public MyThread(){}//一定要有默认构造函数，否则不能实例化
@@ -31,33 +55,6 @@ public class Create {
             }
         }
     }
-
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-        //M1.使用MyThread
-        MyThread t1 = new MyThread();
-        MyThread t2 = new MyThread("M1_1");
-        MyThread t3 = new MyThread();
-        t3.setName("M1_2");
-//        t1.start();
-//        t2.start();
-//        t3.start();
-
-        //创建MyRunnable类的对象
-        MyRunnable my = new MyRunnable();
-        //创建Thread类的对象，把MyRunnable对象作为构造方法的参数
-        //方法1.Thread(Runnable target)
-         Thread t4 = new Thread(my);
-         Thread t5 = new Thread(my, "MyThread(MyRunnable)");
-//         t4.start();
-//         t5.start();
-
-         //M3.实现Callable
-//        method1();
-        method2();
-    }
-
-
-
     private static void method1() throws ExecutionException, InterruptedException {
         ExecutorService executorPool = Executors.newFixedThreadPool(10);
         //创建一个Callable，3秒后返回String类型
@@ -75,7 +72,6 @@ public class Create {
         System.out.println("获得返回值: "+future.get());
         System.out.println("获得结果之后 "+getStringDate());
     }
-
     private static void method2() throws ExecutionException, InterruptedException {
         ExecutorService executorPool = Executors.newFixedThreadPool(10);
         //创建一个Callable，3秒后返回String类型
@@ -98,8 +94,6 @@ public class Create {
             System.out.println(f.get().toString());
         }
     }
-
-
     public static String getStringDate() {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
